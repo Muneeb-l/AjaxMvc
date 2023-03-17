@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AjaxMvc.Models;
 using AjaxMvc.Views.Movies;
+using AjaxMvc.Views.Shared;
 
 namespace AjaxMvc.Controllers
 {
@@ -11,9 +12,9 @@ namespace AjaxMvc.Controllers
         
         
             DataService dataService;
-            public MoviesController(DataService dataservice)
+            public MoviesController()
             {
-                this.dataService = dataservice;
+                this.dataService = new DataService();
             }
         
         [HttpGet("")]
@@ -23,10 +24,10 @@ namespace AjaxMvc.Controllers
         }
 
         [HttpGet("/Movies/{Id}")]
-        public IActionResult Index(IndexVM vM)
+        public IActionResult Index(int id)
         {
-            Movie movie = dataService.MovieGetById(vM);
-            return View();
+            _MovieVM movie = dataService.MovieGetById(id);
+            return PartialView("_Movie", movie);
         }
 
 

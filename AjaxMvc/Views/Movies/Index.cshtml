@@ -1,28 +1,27 @@
-﻿<form>
+﻿
 	<label>Movie ID </label>
 	<br/>
-    <input type="text" id="divResult" />
-</form>
+    <input type="number" id="MovieId" />
+    <br/>
+    <input type="button" value="Get HTML" onclick="GetMovieHTML()"/>
 
-@*<div id="divResult"></div>*@
+    <div id="divResult">Muneeb</div>
 @section endOfBody
 {
     <script>
-        const myDiv = document.getElementById("divResult");
-        //setInterval(() => {
-        //    fetch("/Timebox",
-        //        {
-        //            method: "GET",
-        //        })
-        //        .then(result => result.text())
-        //        .then(html => myDiv.innerHTML = html);
-        //}, 1000);
-
-        fetch("/Movies",
-            {
-                method: "GET",
-            })
-            .then(result => result.json())
-            .then(obj => myDiv.innerText = obj[2].brand);
+        function GetMovieHTML(){
+            
+            const myDiv = document.getElementById("divResult");
+            
+            const movieId = document.getElementById("MovieId");
+            fetch("/Movies/"+movieId.value,
+                    {
+                        method: "GET",
+                    })
+                    .then(result => result.text())
+                    .then(html => myDiv.innerHTML = html)
+            
+        }
+       
     </script>
 }
