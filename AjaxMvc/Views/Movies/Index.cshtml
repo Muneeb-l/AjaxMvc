@@ -1,0 +1,28 @@
+﻿<form>
+	<label>Movie ID </label>
+	<br/>
+    <input type="text" id="divResult" />
+</form>
+
+@*<div id="divResult"></div>*@
+@section endOfBody
+{
+    <script>
+        const myDiv = document.getElementById("divResult");
+        //setInterval(() => {
+        //    fetch("/Timebox",
+        //        {
+        //            method: "GET",
+        //        })
+        //        .then(result => result.text())
+        //        .then(html => myDiv.innerHTML = html);
+        //}, 1000);
+
+        fetch("/Movies",
+            {
+                method: "GET",
+            })
+            .then(result => result.json())
+            .then(obj => myDiv.innerText = obj[2].brand);
+    </script>
+}
